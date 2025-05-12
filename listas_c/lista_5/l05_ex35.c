@@ -11,7 +11,7 @@ int Menu();
 int main() {
 
     int op, num1, num2;
-    char string1[20], string2[100], c1, c2;
+    char string1[100], string2[100], c1, c2;
 
     do{
         op = Menu();
