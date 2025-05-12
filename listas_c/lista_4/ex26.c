@@ -3,8 +3,13 @@
 
 int main( ) {
 
-    int v[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 15 };
+    int v[10];
     double media = 0, desvioPadrao, somatorio = 0;
+
+    for ( int i = 0 ; i < 10 ; i++ ){
+        printf( "\nDigite o numero de posição %d: ", i );
+        scanf( "%d", v[i] );
+    }
 
     for ( int i = 0 ; i < 10 ; i++ ){
         media += v[i];
