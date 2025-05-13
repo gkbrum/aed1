@@ -8,7 +8,7 @@
             "name": "(gdb) Debug 'listas_c'",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\listas_c\\a.exe",
+            "program": "${workspaceFolder}\\a.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
