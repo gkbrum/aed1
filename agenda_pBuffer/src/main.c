@@ -21,6 +21,9 @@ int main(){
             break;
         }
     }while( *(I) != 5 );
+
+    printf( "\n\nDesligando.\n\n" );
+    free( pBuffer );
     
     return 0;
 }

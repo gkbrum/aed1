@@ -109,3 +109,41 @@ void *SearchPerson( void *pBuffer ){
     return NULL;
 }
 
+void *DeletePerson( void *pBuffer ){
+    char *person = SearchPerson( pBuffer );                   //ponteiro para o nome da pessoa a ser exckuida
+    void *final = ( char * )pBuffer + *( BUFFER_SIZE );
+    int *aux = I;
+
+    printf( "\nTem certeza que deseja deletar essa pessoa?" );
+    PrintPerson( person );
+    scanf( "%d", aux );
+    while( getchar() != '\n' );
+
+    if( *aux != 1 ) return pBuffer;
+
+    if( person ){                                                                   //testa se SearchPerson encontrou o nome
+        char *email = person + strlen( person ) + 1;                                //ponteiro para o email
+        char *nextPerson = email + strlen( email ) + 1 + sizeof( int );             //ponteiro para a proxima pessoa 
+
+        *aux = ( int )( ( char * )final - nextPerson );                     //tamanho restante após a remoçao da pessoa
+
+        person = memmove( person, nextPerson, *aux );                       //move o restante do buffer para cima da pessoa a ser deletada
+
+        *aux = ( int )( nextPerson - person );                              //tamanho da pessoa deletada                   
+        pBuffer = realloc( pBuffer, *BUFFER_SIZE - *aux );                  //remove a memoria em excesso no final do buffer
+        *BUFFER_SIZE = *BUFFER_SIZE - *aux;                                 //atualiza o tamanho do buffer
+
+        ( *NUM_PERSONS )--;
+    }
+
+    return pBuffer;
+}
+
+void PrintPerson( char *name ){
+    char *email = name + strlen( name ) + 1;
+    int *age = ( int * )( email + strlen( email ) + 1 );
+    
+    printf( "\nNome: %s", name );
+    printf( "\nE-mail: %s", email );
+    printf( "\nIdade: %d", *age );
+}
