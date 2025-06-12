@@ -8,7 +8,7 @@
 #define TEMP_EMAIL          ( ( char * )pBuffer + ( sizeof( int ) * 3 ) + ( sizeof( char ) * 100 ) )
 #define HEAD                ( ( char * )pBuffer + ( sizeof( int ) * 3 ) + ( sizeof( char ) * 200 ) )
 
-int ShowMenu( int *op );
+void ShowMenu( int *op );
 void *InitBuffer();
 void *AddPerson( void *pBuffer );
 void *SearchPerson( void *pBuffer );

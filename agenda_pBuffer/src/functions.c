@@ -3,15 +3,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-int ShowMenu( int *op ){
+void ShowMenu( int *op ){
     printf( "\n1. Adicionar Pessoa.\n" );
     printf( "2. Remover Pessoa.\n" );
     printf( "3. Buscar Pessoa.\n" );
     printf( "4. Listar Tudo.\n" );
+    printf( "5. Sair.\n" );
     printf( "\nEscolha uma opcao:" );
     scanf( "%d", op );
-
-    return ( *op );
+    while( getchar() != '\n' );
 }
 
 void *InitBuffer(){
@@ -28,7 +28,7 @@ void *InitBuffer(){
     return pBuffer;
 }
 
-void *AddPessoa( void *pBuffer ){
+void *AddPerson( void *pBuffer ){
     
     //usei macros antes do realloc por que com ponteiros estava gerando warnings
 
@@ -42,7 +42,7 @@ void *AddPessoa( void *pBuffer ){
     TEMP_EMAIL[ strlen( TEMP_EMAIL ) - 1 ] = '\0';
 
     //realoca o ponteiro e testa
-    pBuffer = realloc( pBuffer, *( BUFFER_SIZE ) +                             //tamanho atual do buffer
+    pBuffer = realloc( pBuffer, *( BUFFER_SIZE ) +                  //tamanho atual do buffer
     ( strlen( TEMP_NAME ) + 1 * sizeof( char ) ) +                  //espaço para a string nome
     ( strlen( TEMP_EMAIL ) + 1 * sizeof( char ) ) +                 //espaço para a string email
     sizeof( int ) );                                                //espaço para a idade
@@ -55,7 +55,7 @@ void *AddPessoa( void *pBuffer ){
     int *numPersons = NUM_PERSONS;
     char *tempName = TEMP_NAME;
     char *tempEmail = TEMP_EMAIL;
-    char *size = BUFFER_SIZE;
+    int *size = BUFFER_SIZE;
 
     //atribui os dados ao espaço alocado
     char *newString = ( char * )pBuffer + *size;
