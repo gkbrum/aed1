@@ -2,8 +2,7 @@
 
 int main(){
     
-    void *pBuffer;
-    InitBuffer( &pBuffer );
+    void *pBuffer = InitBuffer();
     
     return 0;
 }
