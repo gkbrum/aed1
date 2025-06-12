@@ -14,6 +14,7 @@ void *InitBuffer();
 void *AddPerson( void *pBuffer );
 void *SearchPerson( void *pBuffer );
 void *DeletePerson( void *pBuffer );
+void ListAll( void *pBuffer );
 void PrintPerson( char *name );
 
 #endif

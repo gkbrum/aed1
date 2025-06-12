@@ -114,8 +114,11 @@ void *DeletePerson( void *pBuffer ){
     void *final = ( char * )pBuffer + *( BUFFER_SIZE );
     int *aux = I;
 
-    printf( "\nTem certeza que deseja deletar essa pessoa?" );
+    if( !person ) return pBuffer;
+
+    printf( "\nTem certeza que deseja deletar essa pessoa?\n" );
     PrintPerson( person );
+    printf( "\n1. Sim\n0. Nao\n" );
     scanf( "%d", aux );
     while( getchar() != '\n' );
 
@@ -129,9 +132,9 @@ void *DeletePerson( void *pBuffer ){
 
         person = memmove( person, nextPerson, *aux );                       //move o restante do buffer para cima da pessoa a ser deletada
 
-        *aux = ( int )( nextPerson - person );                              //tamanho da pessoa deletada                   
-        pBuffer = realloc( pBuffer, *BUFFER_SIZE - *aux );                  //remove a memoria em excesso no final do buffer
-        *BUFFER_SIZE = *BUFFER_SIZE - *aux;                                 //atualiza o tamanho do buffer
+        *aux = ( int )( nextPerson - person );                              //tamanho da pessoa deletada
+        *BUFFER_SIZE = *BUFFER_SIZE - *aux;                                 //atualiza o tamanho do buffer   
+        pBuffer = realloc( pBuffer, *BUFFER_SIZE );                         //remove a memoria em excesso no final do buffer
 
         ( *NUM_PERSONS )--;
     }
@@ -139,11 +142,26 @@ void *DeletePerson( void *pBuffer ){
     return pBuffer;
 }
 
+void ListAll( void *pBuffer ){
+    char *name = ( char *)pBuffer + OFFSET_DATA;
+    
+    for( *I = 0; *I < *NUM_PERSONS; (*I)++ ){
+        PrintPerson( name );
+
+        //passa o ponteiro name para a posição da proxima pessoa
+        name = name + strlen( name ) + 1;          //name passa a apontar para o email
+        name = name + strlen( name ) + 1;          //name passa a apontar para a idade
+        name = name + sizeof( int );               //name passa a apontar para o nome da proxima pessoa
+    }
+}
+
 void PrintPerson( char *name ){
+    if( !name ) return;
+    
     char *email = name + strlen( name ) + 1;
     int *age = ( int * )( email + strlen( email ) + 1 );
     
     printf( "\nNome: %s", name );
     printf( "\nE-mail: %s", email );
-    printf( "\nIdade: %d", *age );
+    printf( "\nIdade: %d\n", *age );
 }

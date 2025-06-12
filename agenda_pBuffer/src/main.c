@@ -1,4 +1,6 @@
 #include "functions.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(){
     
@@ -8,15 +10,34 @@ int main(){
     do{
         ShowMenu( I );
         
-        switch ( *(I) )
+        switch ( *I )
         {
         case 1:
             pBuffer = AddPerson( pBuffer );
             
-            *(I) = 1;
-
+            *I = 1;
             break;
         
+        case 2:
+            pBuffer = DeletePerson( pBuffer );
+
+            *I = 2;
+            break;
+
+        case 3:
+            char *name = SearchPerson( pBuffer );
+            PrintPerson( name );
+
+            *I = 3;
+            break;
+        
+        case 4:
+
+            ListAll( pBuffer );
+
+            *I = 4;
+            break;
+            
         default:
             break;
         }
